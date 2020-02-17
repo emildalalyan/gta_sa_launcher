@@ -1,0 +1,455 @@
+a:4:{s:6:"fmmain";a:35:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:4665:"define(VER, "1.7");
+define(BUILD, "03.2020");
+define( LINK, "http://www.vk.com/emildalalyan");
+global $find, $lang_1, $message, $ex, $ex1, $writeOnRegister, $sc, $ex2, $na, $na1, $na2;
+
+app::title( "GTA SA: Launcher");
+$writeOnRegister = true;
+
+if( file_exists("programs/php/include")){
+    $fi = findFiles("programs/php/include", "php", false, true);
+    foreach( $fi as $as ){
+        include( $as );
+    }
+}
+
+if(file_exists("scripts/global.ini")) ini::open("scripts/global.ini");
+else ini::open("global.ini");
+
+ini::read("GlobalSets", "LoadPlugins", $var);
+c("fmMain->checkbox1")->checked = intval($var);
+
+c("fmMain->label2")->caption = LINK;
+c("fmMain->label2")->link = LINK;
+
+ini::open("programs/launcher.ini");
+ini::read( "MAIN", "lang", $var);
+
+lau::setLang(intval($var));
+
+ini::read("MAIN", "doubleBuff", $var);
+$self->doubleBuffered = intval($var);
+
+ini::read("MAIN", "do_not_load_php", $var);
+if( !intval($var)){
+    if( file_exists("programs/php/") ){
+    $sc = 0;
+    foreach( findFiles("programs/php/", "php", false, true) as $file ){
+        eval( str_ireplace( "<?", "", str_ireplace("?>", "", str_ireplace("<?php", "", file_get_contents($file)))) );
+        $sc++;
+        if( err_msg() ){
+            messageBox( err_msg() . " in file: " . $progDir . $file, "-", MB_OK | MB_ICONERROR );
+            exit();
+        }
+    }
+    if( $sc ){
+        c("fmMain->label3")->caption = $message[9] . " " . $sc . " PHP " . $message[10];
+        c("fmMain->label3")->visible = true;
+    }
+    }
+}
+
+ini::read("MAIN", "write_gta_exe_on_register", $var);
+$writeOnRegister = intval($var);
+
+//CLEO
+
+if( !file_exists("CLEO.asi") ){
+        c("checkbox1")->enabled = false;
+        c("checkbox1")->checked = false;
+        c("applyB")->hide();
+        c("close")->x = c("applyB")->x;
+        c("samp")->w += c("applyB")->w;
+}
+
+$self->setFocus();
+
+if( file_exists("img.png")){
+    c("img")->loadFromFile( "img.png" );
+}
+    
+
+if( !file_exists("gta_sa.exe") && !file_exists("gta_sa_w10.exe") ) c("gta_sa")->enabled = false;
+
+
+foreach( findFiles( $progDir, "ini", false, false) as $f) if( $f != "global.ini" && $f != "desktop.ini") c("listBox1")->text .= $f;
+foreach( findFiles( "$progDir/scripts", "ini", false, false) as $f) if( $f != "global.ini" && $f != "desktop.ini") c("listBox1")->text .= "scripts/" . $f;
+foreach( findFiles( "$progDir/cleo", "ini", false, false) as $f) if( $f != "desktop.ini") c("listBox1")->text .= "cleo/" . $f;
+
+
+if( file_exists("programs/loadsc/LOADSC43HD.txd") || file_exists("programs/loadsc/LOADSC169HD.txd") ){
+    c("applyB4")->show();
+    c("lscr")->show();
+}
+else {
+
+if( file_exists("programs/loadsc/LOADSC43HD_MS.txd") || file_exists("programs/loadsc/LOADSC169HD_MS.txd") ){
+    c("applyB4")->show();
+    c("lscr")->show();
+}
+
+}
+
+foreach( findFiles( "$progDir/scripts", "asi", false, false) as $as ){
+    if( $as != "CLEO.asi"){
+        c("listBox2")->text .= "scripts/$as";
+    }
+}
+
+foreach( findFiles( "$progDir/cleo", "cs", false, false) as $as ){
+        c("listBox2")->text .= "cleo/$as";
+}
+
+foreach( findFiles( "$progDir", "asi", false, false) as $as ){
+    if( $as != "CLEO.asi"){
+        c("listBox2")->text .= $as;
+    }
+}
+
+if( file_exists("programs/buttons.ini")){
+    ini::open("programs/buttons.ini");
+    ini::read("button0","icon",$ic);
+    ini::read("button0","exec",$ex);
+    ini::read("button0","name",$na);
+    ini::read("button1","icon",$ic1);
+    ini::read("button1","exec",$ex1);
+    ini::read("button1","name",$na1);
+    ini::read("button2","icon",$ic2);
+    ini::read("button2","exec",$ex2);
+    ini::read("button2","name",$na2);
+    
+    if( !$ex ) c("satp")->enabled = file_exists("programs/satp/sat.exe");
+    else c("satp")->enabled = file_exists($ex);
+    
+    if( !$ex1 ) c("txd")->enabled = file_exists("programs/txdw/txdw.exe");
+    else c("txd")->enabled = file_exists($ex1);
+    
+    if( !$ex2 ) c("samp")->enabled = file_exists("samp.exe");
+    else c("samp")->enabled = file_exists($ex2);
+    
+    if( file_exists( $ic2 )) c("samp")->loadPicture( $ic2 );
+    if( $na2 ) c("samp")->caption = $message[8] . " " . $na2;
+    
+    if( file_exists( $ic )) c("satp")->loadPicture( $ic );
+    if( $na ) c("satp")->caption = $message[8] . " " . $na;
+    
+    if( file_exists( $ic1 )) c("txd")->loadPicture( $ic1 );
+    if( $na1 ) c("txd")->caption = $message[8] . " " . $na1;
+}
+else {
+    c("satp")->enabled = file_exists("programs/satp/sat.exe");
+    c("txd")->enabled = file_exists("programs/txdw/txdw.exe");
+    c("samp")->enabled = file_exists("samp.exe");
+}";}s:6:"otherp";N;s:5:"gamep";N;s:11:"tabcontrol1";a:1:{s:8:"onchange";s:266:"
+/*elseif( $self->tabIndex == 2){
+	c("scP")->toFront();
+	}*/
+switch( $self->tabIndex ){
+    case 0: c("gameP")->toFront(); break;
+    case 1: c("otherP")->toFront(); break;
+    case 2: c("scP")->toFront(); break;
+    case 3: c("aboutP")->toFront(); break;
+}";}s:6:"aboutp";N;s:9:"checkbox1";a:2:{s:11:"onmousedown";s:25:"c("applyB")->enabled = 1;";s:7:"onkeyup";s:25:"c("applyB")->enabled = 1;";}s:6:"applyb";a:1:{s:7:"onclick";s:221:"ini::open("global.ini");
+ini::write( "GlobalSets", "LoadPlugins", c("checkbox1")->checked);
+ini::open("scripts/global.ini");
+ini::write( "GlobalSets", "LoadPlugins", c("checkbox1")->checked);
+
+$self->enabled = false;";}s:9:"combobox1";a:1:{s:8:"onchange";s:476:"err_no();
+/*
+if( $self->itemIndex == 3 && c("oDlg")->execute() && c("oDlg")->fileName !== ""){
+eval( file_get_contents( c("oDlg")->fileName ) );
+c("tabControl1")->tabIndex = 1;
+$self->itemIndex = 3;
+if( err_msg() ){
+    error_message( "Invalid script!" );
+    }
+else {
+    file_p_contents( "programs/launcher.dat", file_get_contents( c("oDlg")->fileName ) );
+    }
+}
+elseif( $self->itemIndex != 3) {*/
+c("applyB2")->enabled = 1;
+c("applyB2")->caption = "";
+//}";}s:7:"applyb2";a:1:{s:7:"onclick";s:264:"lau::setLang(c("combobox1")->itemIndex);
+//----------------------
+ini::open("programs/launcher.ini");
+ini::write( "MAIN", "lang", c("combobox1")->itemIndex);
+//----------------------
+c("tabControl1")->tabIndex = 1;
+$self->enabled = 0;
+$self->caption = "OK";";}s:6:"gta_sa";a:2:{s:7:"onclick";s:269:"global $message;
+if( !file_exists("gta_sa_w10.exe")){
+    if( file_exists("gta_sa.exe")) run("gta_sa.exe");
+    elseif( !file_exists("gta_sa.exe") ) messageBox( $message[0], "GTA SA: Launcher", MB_OK | MB_ICONERROR );
+}
+else run("gta_sa_w10.exe");
+
+app::close();";s:11:"onmousedown";s:250:"if( $button == 1 ){
+    if(file_exists("gta_sa_w10.exe")) exec('taskkill -im "gta_sa_w10.exe"' );
+    if(file_exists("gta_sa.exe")) exec('taskkill -im "gta_sa.exe"' );
+    
+    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION );
+}";}s:4:"samp";a:1:{s:7:"onclick";s:624:"global $message, $writeOnRegister, $ex2;
+if( isset( $ex2 ) && file_exists( $ex2)){
+    run( $ex2 );
+}
+else {
+if( file_exists("samp.exe")){
+    if( $writeOnRegister){
+        if( file_exists("gta_sa_w10.exe")){
+            writeRegKey( "HKEY_CURRENT_USER", "Software\SAMP\gta_sa_exe", $progDir . "gta_sa_w10.exe");
+        }
+        else if( file_exists("gta_sa.exe")){
+            writeRegKey( "HKEY_CURRENT_USER", "Software\SAMP\gta_sa_exe", $progDir . "gta_sa.exe");
+        }
+    }
+    run("samp.exe", false);
+}
+else messageBox( $message[0], "GTA SA: Launcher", MB_OK | MB_ICONERROR );
+
+}
+app::close();";}s:5:"close";a:1:{s:7:"onclick";s:7:"exit();";}s:9:"laun_lang";N;s:4:"satp";a:1:{s:7:"onclick";s:93:"global $ex;
+if( !$ex ){
+    run("/programs/satp/sat.exe", false);
+}
+else run($ex, false);";}s:3:"txd";a:1:{s:7:"onclick";s:97:"global $ex1;
+if( !$ex1){
+    run("/programs/txdw/txdw.exe", false);
+}
+else run( $ex1, false);";}s:3:"scp";N;s:8:"unoftext";N;s:8:"verlabel";N;s:6:"label1";N;s:6:"image2";N;s:6:"buildd";N;s:3:"img";a:1:{s:11:"onmousedown";s:38:"if($button == 2) run($progdir, false);";}s:7:"applyb4";a:1:{s:7:"onclick";s:1578:"if( ($SCREEN->width / $SCREEN->height) < 1.5 ){
+    if( file_exists("cleo/FOV.ini")){
+        ini::open("cleo/FOV.ini");
+        ini::write("fov", "fov", 90);
+    }
+
+    if( file_exists("moddedsaa/") && file_exists("programs/loadsc/loadsc43hd_ms.txd")){
+            copy( "programs/loadsc/loadsc43hd_ms.txd", "moddedsaa/LOADSCS.txd");
+    }
+
+    if( file_exists("scripts/moddedsaa/") && file_exists("programs/loadsc/loadsc43hd_ms.txd")){
+            copy( "programs/loadsc/loadsc43hd_ms.txd", "scripts/moddedsaa/LOADSCS.txd");
+    }
+
+    if(file_exists("programs/loadsc/loadsc43hd.txd")) {
+        copy( "programs/loadsc/loadsc43hd.txd", "models/txd/LOADSCS.txd");
+    }
+    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);
+}
+
+else {
+    if( file_exists("cleo/FOV.ini")){
+        ini::open("cleo/FOV.ini");
+        if(($SCREEN->width / $SCREEN->height) < 1.9) ini::write("fov", "fov", 90);
+        else ini::write("fov", "fov", 60);
+    }
+
+    if( file_exists("moddedsaa/") && file_exists("programs/loadsc/loadsc169hd_ms.txd")){
+            copy( "programs/loadsc/loadsc169hd_ms.txd", "moddedsaa/LOADSCS.txd");
+    }
+
+    if( file_exists("scripts/moddedsaa/") && file_exists("programs/loadsc/loadsc169hd_ms.txd")){
+            copy( "programs/loadsc/loadsc169hd_ms.txd", "scripts/moddedsaa/LOADSCS.txd");
+    }
+
+    if(file_exists("programs/loadsc/loadsc169hd.txd")) {
+        copy( "programs/loadsc/loadsc169hd.txd", "models/txd/LOADSCS.txd");
+    }
+    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);
+}";}s:4:"lscr";N;s:11:"tabcontrol2";a:1:{s:8:"onchange";s:182:"
+/*elseif( $self->tabIndex == 2){
+	c("scP")->toFront();
+	}*/
+switch( $self->tabIndex ){
+    case 0: c("panel1")->toFront(); break;
+    case 1: c("panel2")->toFront(); break;
+}";}s:3:"edc";a:1:{s:7:"onclick";s:594:"global $message, $find;
+if(!c("listBox1")->items->selected){
+    msg( $message[2] );
+}
+else {
+    if(file_exists(c("listBox1")->items->selected)) {
+        c("fmEditor->synEdit1")->LoadFromFile( c("listBox1")->items->selected);
+        c("fmEditor->data")->value = c("listBox1")->items->selected;
+        c("fmEditor")->caption = c("listBox1")->items->selected;
+        c("fmEditor")->x = ($SCREEN->width / 2) - (c("fmEditor")->w / 2);
+        c("fmEditor")->y = ($SCREEN->height / 2) - (c("fmEditor")->h / 2);
+        c("fmEditor")->showModal();
+    }
+    else message_beep(0);
+}";}s:3:"rfs";a:1:{s:7:"onclick";s:535:"$lBs = c("listBox1")->items->selected;
+
+c("listBox1")->text = "";
+
+foreach( findFiles( $progDir, "ini", false, false) as $f) if( $f != "global.ini" && $f != "desktop.ini") c("listBox1")->text .= $f;
+foreach( findFiles( "$progDir/scripts", "ini", false, false) as $f) if( $f != "global.ini" && $f != "desktop.ini") c("listBox1")->text .= "scripts/" . $f;
+foreach( findFiles( "$progDir/cleo", "ini", false, false) as $f) c("listBox1")->text .= "cleo/" . $f;
+
+c("listBox1")->items->selected = $lBs;
+
+$lBs = null;
+unset( $lBs );";}s:8:"listbox1";a:2:{s:10:"ondblclick";s:514:"if(c("listBox1")->items->selected && file_exists(c("listBox1")->items->selected)){
+            c("fmEditor->synEdit1")->LoadFromFile( c("listBox1")->items->selected);
+            c("fmEditor->data")->value = c("listBox1")->items->selected;
+            c("fmEditor")->caption = c("listBox1")->items->selected;
+            c("fmEditor")->x = ($SCREEN->width / 2) - (c("fmEditor")->w / 2);
+            c("fmEditor")->y = ($SCREEN->height / 2) - (c("fmEditor")->h / 2);
+            c("fmEditor")->showModal();
+}";s:7:"onkeyup";s:711:"if( $key == 13){
+    global $message, $find;
+    if(!c("listBox1")->items->selected){
+        msg( $message[2] );
+    }
+    else {
+            if(file_exists(c("listBox1")->items->selected)) {
+                c("fmEditor->synEdit1")->LoadFromFile( c("listBox1")->items->selected);
+                c("fmEditor->data")->value = c("listBox1")->items->selected;
+                c("fmEditor")->caption = c("listBox1")->items->selected;
+                c("fmEditor")->x = ($SCREEN->width / 2) - (c("fmEditor")->w / 2);
+                c("fmEditor")->y = ($SCREEN->height / 2) - (c("fmEditor")->h / 2);
+                c("fmEditor")->showModal();
+            }
+            else message_beep(0);
+    }
+}";}s:6:"panel2";N;s:8:"listbox2";a:0:{}s:3:"spb";a:1:{s:7:"onclick";s:849:"global $message;
+
+if(c("listBox2")->items->selected){
+    if( messageBox($message[12], "GTA SA: Launcher", MB_YESNO | MB_ICONQUESTION ) == mrYes){
+        file_delete( c("listBox2")->items->selected );
+        c("listBox2")->text = "";
+
+        foreach( findFiles( "$progDir/scripts", "asi", false, false) as $as ){
+            if( $as != "CLEO.asi"){
+                c("listBox2")->text .= "scripts/$as";
+            }
+        }
+
+        foreach( findFiles( "$progDir/cleo", "cs", false, false) as $as ){
+                c("listBox2")->text .= "cleo/$as";
+        }
+
+        foreach( findFiles( $progDir, "asi", false, false) as $as ){
+            if( $as != "CLEO.asi"){
+                c("listBox2")->text .= "$as";
+            }
+        }
+    }
+}
+else messageBox( $message[4], "GTA SA: Launcher", MB_OK | MB_ICONWARNING);";}s:9:"spbutton1";a:1:{s:7:"onclick";s:558:"$lBs = c("listBox2")->items->selected;
+c("listBox2")->text = "";
+
+foreach( findFiles( "$progDir/scripts", "asi", false, false) as $as ){
+    if( $as != "CLEO.asi"){
+        c("listBox2")->text .= "scripts/$as";
+    }
+}
+
+foreach( findFiles( "$progDir/cleo", "cs", false, false) as $as ){
+        c("listBox2")->text .= "cleo/$as";
+}
+
+foreach( findFiles( "$progDir", "asi", false, false) as $as ){
+    if( $as != "CLEO.asi"){
+        c("listBox2")->text .= "$as";
+    }
+}
+
+c("listBox2")->items->selected = $lBs;
+$lBs = null;
+unset( $lBs );";}s:7:"button1";a:1:{s:7:"onclick";s:30:"c("fmProgsEdit")->showModal();";}s:6:"label3";a:0:{}s:6:"label2";N;}s:8:"fmeditor";a:6:{s:8:"--fmedit";a:3:{s:8:"oncreate";s:717:"gui_propSet(c("synEdit1")->gutter, 'showlinenumbers', 1);
+if( file_exists("programs/edit.ini")){
+    ini::open( "programs/edit.ini");
+    ini::read( "SynEdit", "font_name", $a[0]);
+    ini::read( "SynEdit", "font_style", $a[1]);
+    ini::read( "SynEdit", "font_color", $a[2]);
+    ini::read( "SynEdit", "font_size", $a[3]);
+    ini::read( "Window", "w", $w[0]);
+    ini::read( "Window", "h", $w[1]);
+    if( $w[0] || $w[1] ){
+        $self->w = $w[0];
+        $self->h = $w[1];
+    }
+    if( $a ) {
+        c("synEdit1")->font->name = $a[0];
+        c("synEdit1")->font->style = $a[1];
+        c("synEdit1")->font->color = $a[2];
+        c("synEdit1")->font->size = $a[3];
+    }
+    unset( $a );
+}";s:7:"onkeyup";s:0:"";s:12:"onclosequery";s:508:"global $message;
+ini::open( "programs/edit.ini");
+ini::write( "Window", "w", $self->w);
+ini::write( "Window", "h", $self->h);
+
+$canClose = true;
+
+if( file_get_contents( c("data")->value ) != c("synEdit1")->text ){
+    $mD = messageDlg($message[1], mtConfirmation, 3);
+    if( $mD == 6 ){
+        if(!file_p_contents( c("data")->value, c("synEdit1")->text)){
+            messageDlg($message[3], mtInformation, MB_OK);
+        }
+    }
+    elseif( $mD == 2 ){
+        $canClose = false;
+    }
+}";}s:4:"data";N;s:9:"spbutton1";a:1:{s:7:"onclick";s:108:"if(file_p_contents( c("data")->value, c("synEdit1")->text)){
+    messageDlg("OK", mtInformation, MB_OK);
+}";}s:8:"synedit1";a:1:{s:7:"onkeyup";s:161:"if( $key == 83){
+if( $shift[0] == "ssCtrl"){
+if(file_p_contents( c("data")->value, c("synEdit1")->text)){
+    messageDlg("OK", mtInformation, MB_OK);
+}
+}
+}";}s:9:"spbutton2";a:1:{s:7:"onclick";s:464:"$a = new TFontDialog;
+$a->font->assign( c("synEdit1")->font );
+if( $a->execute() ){
+    ini::open( "programs/edit.ini");
+    ini::write( "SynEdit", "font_name", $a->font->name);
+    ini::write( "SynEdit", "font_style", $a->font->style[0]);
+    ini::write( "SynEdit", "font_color", $a->font->color);
+    ini::write( "SynEdit", "font_size", $a->font->size);
+    c("synEdit1")->font->assign( $a->font );
+    c("synEdit1")->font->assign = $a->font->assign;
+}";}s:6:"image2";N;}s:11:"fmprogsedit";a:2:{s:8:"--fmedit";a:1:{s:6:"onshow";s:217:"global $message;
+c("listBox1")->text = c("fmMain->satp")->caption . " - " . $message[6] .  " 0\n" . c("fmMain->txd")->caption . " - " . $message[6] .  " 1\n" . c("fmMain->samp")->caption . " - " . $message[6] . " 2";";}s:7:"button1";a:1:{s:7:"onclick";s:823:"global $message;
+if( c("listBox1")->items->selected ){
+    c("fmEditButton->edit1")->text = "";
+    c("fmEditButton->edit2")->text = "";
+    c("fmEditButton->edit3")->text = "";
+    if( file_exists("programs/buttons.ini")){
+        ini::open("programs/buttons.ini");
+        ini::read( "button" . c("listBox1")->itemIndex, "icon", $ic);
+        ini::read( "button" . c("listBox1")->itemIndex, "exec", $ex);
+        ini::read( "button" . c("listBox1")->itemIndex, "name", $na);
+        c("fmEditButton->edit1")->text = $ic;
+        c("fmEditButton->edit2")->text = $ex;
+        c("fmEditButton->edit3")->text = $na;
+    }
+    c("fmEditButton")->caption = $message[5] . " - " . $message[6] . " " . c("listBox1")->itemIndex;
+    c("fmEditButton")->showModal();
+}
+else {
+    messageBox( $message[7], ";(");
+}";}}s:12:"fmeditbutton";a:10:{s:6:"label2";N;s:5:"edit2";N;s:7:"button3";a:1:{s:7:"onclick";s:270:"$a = new TOpenDialog;
+$a->filter = "Executable file (*.exe)|*.exe";
+if(file_exists(c("edit2")->text)) { $a->initialDir = c("edit2")->text; }
+
+if( $a->execute() && $a->fileName && file_exists( $a->fileName ) ){
+    c("edit2")->text = $a->fileName;
+}
+
+unset( $a );";}s:6:"label3";N;s:5:"edit3";N;s:7:"button1";a:1:{s:7:"onclick";s:222:"$a = new TOpenDialog;
+if(file_exists(c("edit1")->text)){ $a->initialDir = c("edit1")->text; }
+
+if( $a->execute() && $a->fileName && file_exists( $a->fileName ) ){
+    c("edit1")->text = $a->fileName;
+}
+
+unset( $a );";}s:7:"button4";a:1:{s:7:"onclick";s:27:"c("fmEditButton")->close();";}s:7:"button2";a:1:{s:7:"onclick";s:395:"global $ex, $ex1, $ex2, $message, $na, $na1, $na2;
+ini::open( "programs/buttons.ini");
+ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", c("edit1")->text);
+ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", c("edit2")->text);
+ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", c("edit3")->text);
+
+run( $_PARAMS[0] );
+app::close();";}s:7:"button5";a:1:{s:7:"onclick";s:36:"c("fmEditButton->edit2")->text = "";";}s:7:"button6";a:1:{s:7:"onclick";s:36:"c("fmEditButton->edit1")->text = "";";}}}

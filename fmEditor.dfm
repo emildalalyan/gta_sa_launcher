@@ -19,7 +19,6 @@ object fmEdit: TForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  PopupMenu = fmMain.editorPopup
   Position = poDesigned
   Visible = False
   PixelsPerInch = 96
@@ -28,21 +27,21 @@ object fmEdit: TForm
     Left = 0
     Top = 0
     Width = 560
-    Height = 36
+    Height = 30
     HelpType = htKeyword
     HelpKeyword = 
       'AAAAAhQCEQVDTEFTUxEGVFBhbmVsEQZQQVJBTVMUBxEIYXZpc2libGUFEQhhZW5h' +
-      'YmxlZAURAXcMQGIAAAAAAAARAWgMQFsAAAAAAAARBnBhcmVudBcFVEZvcm0UBhEK' +
-      'Y2xhc3NfbmFtZQ4IEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMU' +
-      'Aw4JDgsRBHNlbGYKB0bc+BEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250' +
-      'AA4MCgJZPVAODRQCDgMFEQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0DREK' +
-      'd2luY29udHJvbAU='
+      'YmxlZAURAXcMQGIAAAAAAAARAWgRAjMwEQZwYXJlbnQXBVRGb3JtFAYRCmNsYXNz' +
+      'X25hbWUOCREPACoAX2NvbnN0cmFpbnRzFxBUU2l6ZUNvbnN0cmFpbnRzFAMOCg4M' +
+      'EQRzZWxmCgdG3PgRCAAqAHByb3BzFAARBwAqAGljb24AEQgAKgBfZm9udAAODQoC' +
+      'WT1QDg4UAg4DBREKcG9zaXRpb25leBEKcG9EZXNpZ25lZBEEdGV4dA0RCndpbmNv' +
+      'bnRyb2wF'
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
     object image2: TMImage
-      Left = 45
-      Top = 9
+      Left = 40
+      Top = 6
       Width = 18
       Height = 16
       HelpType = htKeyword
@@ -50,7 +49,8 @@ object fmEdit: TForm
         'AAAAAhQCEQVDTEFTUxEHVE1JbWFnZREGUEFSQU1TFAgRCGF2aXNpYmxlBREIYWVu' +
         'YWJsZWQFEQF3DEBiAAAAAAAAEQFoDEBbAAAAAAAAEQZwYXJlbnQXBlRQYW5lbBQF' +
         'EQpjbGFzc19uYW1lDggRDwAqAF9jb25zdHJhaW50cwARCAAqAF9mb250ABEEc2Vs' +
-        'ZgoAhaugEQgAKgBwcm9wcxQAEQR0ZXh0EQzI5+7h8ODm5e3o5TERAXgGEhEBeQYS'
+        'ZgoAhaugEQgAKgBwcm9wcxQAEQR0ZXh0EQzI5+7h8ODm5e3o5TERAXgRAjQwEQF5' +
+        'EQE2'
       Picture.Data = {
         07544269746D617036030000424D360300000000000036000000280000001000
         000010000000010018000000000000030000C40E0000C40E0000000000000000
@@ -82,16 +82,17 @@ object fmEdit: TForm
       Transparent = True
     end
     object image1: TMImage
-      Left = 9
-      Top = 9
+      Left = 8
+      Top = 6
       Width = 16
       Height = 16
       HelpType = htKeyword
       HelpKeyword = 
-        'AAAAAhQCEQVDTEFTUxEHVE1JbWFnZREGUEFSQU1TFAYRCGF2aXNpYmxlBREIYWVu' +
+        'AAAAAhQCEQVDTEFTUxEHVE1JbWFnZREGUEFSQU1TFAgRCGF2aXNpYmxlBREIYWVu' +
         'YWJsZWQFEQF3DEBiAAAAAAAAEQFoDEBbAAAAAAAAEQZwYXJlbnQXBlRQYW5lbBQF' +
         'EQpjbGFzc19uYW1lDggRDwAqAF9jb25zdHJhaW50cwARCAAqAF9mb250ABEEc2Vs' +
-        'ZgoAhaugEQgAKgBwcm9wcxQAEQR0ZXh0EQzI5+7h8ODm5e3o5TE='
+        'ZgoAhaugEQgAKgBwcm9wcxQAEQR0ZXh0EQzI5+7h8ODm5e3o5TERAXgRATgRAXkR' +
+        'ATY='
       Picture.Data = {
         07544269746D617036040000424D360400000000000036000000280000001000
         0000100000000100200000000000000400000000000000000000000000000000
@@ -133,36 +134,35 @@ object fmEdit: TForm
     object spButton1: TSpeedButton
       Left = 0
       Top = 0
-      Width = 36
-      Height = 36
+      Width = 32
+      Height = 30
       HelpType = htKeyword
       HelpKeyword = 
         'AAAAAhQCEQVDTEFTUxEMVFNwZWVkQnV0dG9uEQZQQVJBTVMUBhEIYXZpc2libGUF' +
-        'EQhhZW5hYmxlZAURAXcMQGIAAAAAAAARAWgMQDsAAAAAAAARBnBhcmVudBcGVFBh' +
-        'bmVsFAURCmNsYXNzX25hbWUOCBEPACoAX2NvbnN0cmFpbnRzABEIACoAX2ZvbnQA' +
-        'EQRzZWxmCgCFq6ARCAAqAHByb3BzFAARBHRleHQRD8H78fLw4P8gyu3u7+rgMQ=='
+        'EQhhZW5hYmxlZAURAXcRAjMyEQFoEQIzMBEGcGFyZW50FwZUUGFuZWwUBREKY2xh' +
+        'c3NfbmFtZQ4KEQ8AKgBfY29uc3RyYWludHMAEQgAKgBfZm9udAARBHNlbGYKAIWr' +
+        'oBEIACoAcHJvcHMUABEEdGV4dBEPwfvx8vDg/yDK7e7v6uAx'
       Flat = True
     end
     object spButton2: TSpeedButton
-      Left = 36
+      Left = 32
       Top = 0
-      Width = 36
-      Height = 36
+      Width = 32
+      Height = 30
       HelpType = htKeyword
       HelpKeyword = 
         'AAAAAhQCEQVDTEFTUxEMVFNwZWVkQnV0dG9uEQZQQVJBTVMUCBEIYXZpc2libGUF' +
-        'EQhhZW5hYmxlZAURAXcMQGIAAAAAAAARAWgMQDsAAAAAAAARBnBhcmVudBcGVFBh' +
-        'bmVsFAURCmNsYXNzX25hbWUOCBEPACoAX2NvbnN0cmFpbnRzABEIACoAX2ZvbnQA' +
-        'EQRzZWxmCgCFq6ARCAAqAHByb3BzFAARBHRleHQRD8H78fLw4P8gyu3u7+rgMREB' +
-        'eAYJEQF5Bgk='
+        'EQhhZW5hYmxlZAURAXcRAjMyEQFoEQIzMBEGcGFyZW50FwZUUGFuZWwUBREKY2xh' +
+        'c3NfbmFtZQ4KEQ8AKgBfY29uc3RyYWludHMAEQgAKgBfZm9udAARBHNlbGYKAIWr' +
+        'oBEIACoAcHJvcHMUABEEdGV4dBEPwfvx8vDg/yDK7e7v6uAxEQF4DgYRAXkGCQ=='
       Flat = True
     end
   end
   object synEdit1: TSynEdit
     Left = 0
-    Top = 36
+    Top = 30
     Width = 560
-    Height = 284
+    Height = 290
     HelpType = htKeyword
     HelpKeyword = 
       'AAAAAhQCEQVDTEFTUxEIVFN5bkVkaXQRBlBBUkFNUxQGEQhhdmlzaWJsZQURCGFl' +

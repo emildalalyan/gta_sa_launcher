@@ -24,7 +24,7 @@ object fmEdit: TForm
     Left = 9
     Top = 9
     Width = 432
-    Height = 99
+    Height = 107
     HelpType = htKeyword
     HelpKeyword = 
       'AAAAAhQCEQVDTEFTUxEIVExpc3RCb3gRBlBBUkFNUxQGEQhhdmlzaWJsZQURCGFl' +
@@ -33,18 +33,24 @@ object fmEdit: TForm
       'cxQDDgkOCxEEc2VsZgoGcoaIEQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2Zv' +
       'bnQADgwKAMy8oA4NFAIOAwURCnBvc2l0aW9uZXgRCnBvRGVzaWduZWQRBHRleHQN'
     Style = lbOwnerDrawFixed
-    ItemHeight = 16
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ItemHeight = 20
+    ParentFont = False
     TabOrder = 0
     Alignment = taLeftJustify
     BorderSelected = True
     TwoColor = clNone
     TwoFontColor = clNone
-    MarginLeft = 2
+    MarginLeft = 4
     ReadOnly = False
   end
   object button1: TBitBtn
     Left = 8
-    Top = 112
+    Top = 120
     Width = 434
     Height = 27
     HelpType = htKeyword

@@ -15,10 +15,14 @@ class lau {
             }
         }
     }
+    function Restart(){
+        runWith($GLOBALS["_PARAMS"][0], implode(" ", array_slice( $GLOBALS["_PARAMS"], 1)));
+        exit();
+    }
     function setLang($lang = 0){
         global $lang_1, $message, $sc, $na, $na1, $na2;
         switch($lang){
-            case 0: {
+            default: {
                 c("tabControl1")->text = "Game
 Programs and Settings
 Scripts
@@ -43,6 +47,8 @@ French";
                 c("edc")->caption = "Edit Config";
                 c("tabControl2")->text = "Configuration
 Manage scripts";
+                c("fmPHPScrs")->caption = "View PHP Scripts...";
+                c("fmMain->panel1")->toFront();
                 c("combobox1")->itemIndex = 0;
                 c("lscr")->caption = "Aspect ratio:";
                 c("applyB4")->caption = "Set aspect ratio";
@@ -59,6 +65,7 @@ Manage scripts";
                 c("fmMain->checkBox3")->caption = "Do not load PHP scripts";
                 c("fmMain->checkBox4")->caption = "Do not use double buffer";
                 c("fmMain->checkBox5")->caption = "Do not write gta_sa.exe in register";
+                c("fmMain->link1")->caption = "Repaint interface";
 
                 $message = array( 0 => "Not found executable file! Code: 0xe", 2 => "Select script!", 1 => "You made changes in file, but not save it. Save this file?", 3 => "File failed to save!", 4 => "Select script.",
                 5 => "Edit", 6 => "Button", 7 => "Please, select button in list!", 8 => "Start", 9 => "Loaded", 10 => "script (s)", 11 => "Please, restart launcher!", 12 => "Do you want to delete this script?");
@@ -96,12 +103,14 @@ Manage scripts";
                 c("edc")->caption = "Изменить";
                 c("tabControl2")->text = "Конфигурация
 Управление скриптами";
+                c("fmMain->panel1")->toFront();
                 c("combobox1")->itemIndex = 1;
                 c("lscr")->caption = "Пропорции:";
                 c("applyB4")->caption = "Выставить пропорции";
                 c("spb")->caption = "Удалить";
                 c("rfs")->caption = "Обновить";
                 c("spButton1")->caption = "Обновить";
+                c("fmPHPScrs")->caption = "Просмотреть PHP скрипты...";
                 c("fmProgsEdit->button1")->caption = "Редактировать";
                 c("fmEditButton->button4")->caption = "Отмена";
                 c("fmEditButton->label1")->caption = "Иконка:";
@@ -112,6 +121,7 @@ Manage scripts";
                 c("fmMain->checkBox3")->caption = "Не загружать PHP скрипты";
                 c("fmMain->checkBox4")->caption = "Не использовать double-buffer";
                 c("fmMain->checkBox5")->caption = "Не прописывать gta_sa.exe в реестр";
+                c("fmMain->link1")->caption = "Перерисовать интерфейс";
 
                 $message = array( 0 => "Не найдено исполняемого файла! Код: 0xe", 2 => "Выберите скрипт!", 1 => "Вы внесли изменения в файл, но не сохранили его. Сохранить этот файл?", 3 => "Файл не удалось сохранить!", 4 => "Выберите скрипт.",
                 5 => "Редактировать", 6 => "Кнопка", 7 => "Пожалуйста, выберите кнопку в списке!", 8 => "Открыть", 9 => "Загружено", 10 => "скрипт (ов)", 11 => "Пожалуйста, перезагрузите лончер!", 12 => "Вы точно хотите удалить этот скрипт?");
@@ -147,6 +157,8 @@ Francais";
                 c("tabControl2")->text = "Configuration
 Manage de scripts";
                 c("spb")->caption = "Delete";
+                c("fmMain->panel1")->toFront();
+                c("fmPHPScrs")->caption = "Afficher les scripts PHP...";
                 c("combobox1")->itemIndex = 2;
                 c("lscr")->caption = "Ratio d'aspect:";
                 c("rfs")->caption = "Recharger";
@@ -162,6 +174,7 @@ Manage de scripts";
                 c("fmMain->checkBox3")->caption = "Ne chargez pas de scripts PHP";
                 c("fmMain->checkBox4")->caption = "Ne pas utiliser de double tampon";
                 c("fmMain->checkBox5")->caption = "N'enregistrez pas gta_sa.exe dans le registre";
+                c("fmMain->link1")->caption = "Redessiner l'interface";
 
                 $message = array( 0 => "Fichier de executable non trouve! Code: 0xe", 2 => "Sel script!", 1 => "Vous avez apporte des modifications mais n'avez pas enregistre le fichier. Enregistrer le fichier?", 3 => "Echec d'enregistrement du fichier!", 4 => "Select de script.",
                 5 => "Edit", 6 => "Le button", 7 => "Please, select button in list!", 8 => "Ouvre", 9 => "Loaded", 10 => "script (s)", 11 => "Please, restart launcher!", 12 => "Voulez-vous supprimer ce script?");

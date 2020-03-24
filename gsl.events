@@ -1,4 +1,4 @@
-a:4:{s:6:"fmmain";a:40:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5427:"define(VER, "1.8");
+a:5:{s:6:"fmmain";a:41:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5427:"define(VER, "1.9");
 define(BUILD, "03.2020");
 define(LINK, "http://www.vk.com/emildalalyan");
 global $find, $lang_1, $message, $ex, $ex1, $writeOnRegister, $sc, $ex2, $na, $na1, $na2, $progDir, $APPLICATION;
@@ -342,7 +342,9 @@ foreach( findFiles( "$progDir", "asi", false, false) as $as ){
 
 c("listBox2")->items->selected = $lBs;
 $lBs = null;
-unset( $lBs );";}s:7:"button1";a:1:{s:7:"onclick";s:30:"c("fmProgsEdit")->showModal();";}s:6:"label3";a:1:{s:7:"onclick";s:27:"run("programs/php", false);";}s:6:"label2";N;s:6:"image3";N;s:13:"version_label";N;s:9:"checkbox3";a:1:{s:7:"onclick";s:99:"ini::open("programs/launcher.ini");
+unset( $lBs );";}s:7:"button1";a:1:{s:7:"onclick";s:30:"c("fmProgsEdit")->showModal();";}s:6:"label3";a:1:{s:7:"onclick";s:149:"c("fmPHPScrs->listBox1")->text = findFiles( "programs/php", "php", false, false);
+c("fmPHPScrs->synEdit1")->text = "";
+c("fmPHPScrs")->showModal();";}s:6:"label2";N;s:6:"image3";N;s:13:"version_label";N;s:9:"checkbox3";a:1:{s:7:"onclick";s:99:"ini::open("programs/launcher.ini");
 ini::write("MAIN", "do_not_load_php", intval($self->checked));";}s:9:"checkbox2";a:1:{s:7:"onclick";s:378:"ini::open("programs/launcher.ini");
 ini::write( "MAIN", "hide_status_bar", intval($self->checked));
 
@@ -360,7 +362,13 @@ ini::write( "MAIN", "lang", c("combobox1")->itemIndex);
 //----------------------
 c("tabControl1")->tabIndex = 1;";}s:9:"checkbox4";a:1:{s:7:"onclick";s:108:"ini::open("programs/launcher.ini");
 ini::write("MAIN", "do_not_use_double_buffer", intval($self->checked));";}s:9:"checkbox5";a:1:{s:7:"onclick";s:116:"ini::open("programs/launcher.ini");
-ini::write("MAIN", "do_not_write_gta_exe_on_register", intval($self->checked));";}}s:8:"fmeditor";a:6:{s:8:"--fmedit";a:3:{s:8:"oncreate";s:717:"gui_propSet(c("synEdit1")->gutter, 'showlinenumbers', 1);
+ini::write("MAIN", "do_not_write_gta_exe_on_register", intval($self->checked));";}s:5:"link1";a:1:{s:7:"onclick";s:160:"foreach( c("fmMain")->componentList as $as ){
+    $a = $as->visible;
+    $as->visible = false;
+    $as->repaint();
+    $as->visible = $a;
+    unset($a);
+}";}}s:8:"fmeditor";a:5:{s:8:"--fmedit";a:3:{s:8:"oncreate";s:717:"gui_propSet(c("synEdit1")->gutter, 'showlinenumbers', 1);
 if( file_exists("programs/edit.ini")){
     ini::open( "programs/edit.ini");
     ini::read( "SynEdit", "font_name", $a[0]);
@@ -413,8 +421,8 @@ if( $a->execute() ){
     ini::write( "SynEdit", "font_size", $a->font->size);
     c("synEdit1")->font->assign( $a->font );
     c("synEdit1")->font->assign = $a->font->assign;
-}";}s:6:"image2";N;}s:11:"fmprogsedit";a:2:{s:8:"--fmedit";a:1:{s:6:"onshow";s:217:"global $message;
-c("listBox1")->text = c("fmMain->satp")->caption . " - " . $message[6] .  " 0\n" . c("fmMain->txd")->caption . " - " . $message[6] .  " 1\n" . c("fmMain->samp")->caption . " - " . $message[6] . " 2";";}s:7:"button1";a:1:{s:7:"onclick";s:823:"global $message;
+}";}}s:11:"fmprogsedit";a:2:{s:8:"--fmedit";a:1:{s:6:"onshow";s:230:"global $message;
+c("fmProgsEdit->listBox1")->text = c("fmMain->satp")->caption . " - " . $message[6] .  " 0\n" . c("fmMain->txd")->caption . " - " . $message[6] .  " 1\n" . c("fmMain->samp")->caption . " - " . $message[6] . " 2";";}s:7:"button1";a:1:{s:7:"onclick";s:823:"global $message;
 if( c("listBox1")->items->selected ){
     c("fmEditButton->edit1")->text = "";
     c("fmEditButton->edit2")->text = "";
@@ -448,11 +456,29 @@ if( $a->execute() && $a->fileName && file_exists( $a->fileName ) ){
     c("edit1")->text = $a->fileName;
 }
 
-unset( $a );";}s:7:"button4";a:1:{s:7:"onclick";s:27:"c("fmEditButton")->close();";}s:7:"button2";a:1:{s:7:"onclick";s:395:"global $ex, $ex1, $ex2, $message, $na, $na1, $na2;
+unset( $a );";}s:7:"button4";a:1:{s:7:"onclick";s:27:"c("fmEditButton")->close();";}s:7:"button2";a:1:{s:7:"onclick";s:376:"global $ex, $ex1, $ex2, $message, $na, $na1, $na2;
 ini::open( "programs/buttons.ini");
 ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", c("edit1")->text);
 ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", c("edit2")->text);
 ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", c("edit3")->text);
 
-run( $_PARAMS[0] );
-app::close();";}s:7:"button5";a:1:{s:7:"onclick";s:36:"c("fmEditButton->edit2")->text = "";";}s:7:"button6";a:1:{s:7:"onclick";s:36:"c("fmEditButton->edit1")->text = "";";}}}
+lau::Restart();";}s:7:"button5";a:1:{s:7:"onclick";s:36:"c("fmEditButton->edit2")->text = "";";}s:7:"button6";a:1:{s:7:"onclick";s:36:"c("fmEditButton->edit1")->text = "";";}}s:9:"fmphpscrs";a:5:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:62:"gui_propSet( c("synEdit1")->gutter, "showlineneumbers", true);";}s:7:"button2";a:1:{s:7:"onclick";s:265:"$a = new TOpenDialog;
+$a->filter = "PHP Files (*.php)|*.php";
+if( $a->execute() && $a->fileName ){
+    if( file_get_contents($a->fileName )){
+        copy( $a->fileName, "programs/php/" . basename( $a->fileName ));
+        lau::Restart();
+    }
+}
+unset($a);";}s:8:"listbox1";a:1:{s:7:"onclick";s:191:"if( file_exists( "programs/php/" . $self->items->selected ) && $self->items->selected){
+    c("fmPHPScrs->synEdit1")->text = file_get_contents( "programs/php/" . $self->items->selected );
+}";}s:7:"button1";a:1:{s:7:"onclick";s:227:"if( file_exists("programs/php/" . c("fmPHPScrs->listBox1")->items->selected) && c("fmPHPScrs->listBox1")->items->selected ){
+    file_delete("programs/php/" . c("fmPHPScrs->listBox1")->items->selected);
+    lau::Restart();
+}";}s:5:"edit1";a:1:{s:8:"onchange";s:276:"if( $self->text ){
+    c("listBox1")->text = "";
+    foreach( findFiles( "programs/php", "php", false, false) as $as ){
+        if( eregi( $self->text, $as )) c("listBox1")->text .= $as;
+    }
+}
+else c("listBox1")->text = findFiles( "programs/php", "php", false, false);";}}}

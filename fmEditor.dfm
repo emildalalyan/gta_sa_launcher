@@ -145,11 +145,12 @@ object fmEdit: TForm
     Height = 290
     HelpType = htKeyword
     HelpKeyword = 
-      'AAAAAhQCEQVDTEFTUxEIVFN5bkVkaXQRBlBBUkFNUxQGEQhhdmlzaWJsZQURCGFl' +
+      'AAAAAhQCEQVDTEFTUxEIVFN5bkVkaXQRBlBBUkFNUxQHEQhhdmlzaWJsZQURCGFl' +
       'bmFibGVkBREBdwxAYgAAAAAAABEBaAxAWwAAAAAAABEGcGFyZW50FwVURm9ybRQG' +
       'EQpjbGFzc19uYW1lDggRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50' +
       'cxQDDgkOCxEEc2VsZgoHRtz4EQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2Zv' +
-      'bnQADgwKAlk9UA4NFAIOAwURCnBvc2l0aW9uZXgRCnBvRGVzaWduZWQRBHRleHQN'
+      'bnQADgwKAlk9UA4NFAIOAwURCnBvc2l0aW9uZXgRCnBvRGVzaWduZWQRBHRleHQN' +
+      'EQlhbGlnbm1lbnQGAg=='
     Align = alClient
     Ctl3D = False
     ParentCtl3D = False

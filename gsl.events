@@ -1,4 +1,4 @@
-a:5:{s:6:"fmmain";a:41:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5427:"define(VER, "1.9");
+a:5:{s:6:"fmmain";a:42:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5301:"define(VER, "1.9.1");
 define(BUILD, "03.2020");
 define(LINK, "http://www.vk.com/emildalalyan");
 global $find, $lang_1, $message, $ex, $ex1, $writeOnRegister, $sc, $ex2, $na, $na1, $na2, $progDir, $APPLICATION;
@@ -44,10 +44,6 @@ if( !intval($var)){
             exit();
         }
     }
-    if( $sc ){
-        c("fmMain->label3")->caption = $message[9] . " " . $sc . " PHP " . $message[10];
-        c("fmMain->label3")->visible = true;
-    }
     }
 }
 c("fmMain->checkbox3")->checked = intval($var);
@@ -85,9 +81,10 @@ foreach( findFiles( "$progDir/scripts", "ini", false, false) as $f) if( $f != "g
 foreach( findFiles( "$progDir/cleo", "ini", false, false) as $f) if( $f != "desktop.ini") c("listBox1")->text .= "cleo/" . $f;
 
 
-if( file_exists("programs/loadsc/LOADSC43HD.txd") || file_exists("programs/loadsc/LOADSC169HD.txd") || file_exists("programs/loadsc/LOADSC43HD_MS.txd") || file_exists("programs/loadsc/LOADSC169HD_MS.txd") ){
+if( (file_exists("programs/loadsc/LOADSC43HD.txd") && file_exists("programs/loadsc/LOADSC169HD.txd")) || (file_exists("programs/loadsc/LOADSC43HD_MS.txd") && file_exists("programs/loadsc/LOADSC169HD_MS.txd")) ){
     c("applyB4")->show();
     c("lscr")->show();
+    c("button2")->show();
 }
 else {
     c("fmMain->groupBox1")->h = 128;
@@ -203,7 +200,7 @@ else run($ex, false);";}s:3:"txd";a:1:{s:7:"onclick";s:97:"global $ex1;
 if( !$ex1){
     run("/programs/txdw/txdw.exe", false);
 }
-else run( $ex1, false);";}s:3:"scp";N;s:8:"unoftext";N;s:8:"verlabel";N;s:6:"label1";N;s:6:"image2";N;s:6:"buildd";N;s:3:"img";a:1:{s:11:"onmousedown";s:38:"if($button == 2) run($progDir, false);";}s:7:"applyb4";a:1:{s:7:"onclick";s:1578:"if( ($SCREEN->width / $SCREEN->height) < 1.5 ){
+else run( $ex1, false);";}s:3:"scp";N;s:8:"unoftext";N;s:8:"verlabel";N;s:6:"label1";N;s:6:"image2";N;s:6:"buildd";N;s:3:"img";a:1:{s:11:"onmousedown";s:38:"if($button == 2) run($progDir, false);";}s:7:"applyb4";a:1:{s:7:"onclick";s:710:"
     if( file_exists("cleo/FOV.ini")){
         ini::open("cleo/FOV.ini");
         ini::write("fov", "fov", 90);
@@ -220,29 +217,7 @@ else run( $ex1, false);";}s:3:"scp";N;s:8:"unoftext";N;s:8:"verlabel";N;s:6:"lab
     if(file_exists("programs/loadsc/loadsc43hd.txd")) {
         copy( "programs/loadsc/loadsc43hd.txd", "models/txd/LOADSCS.txd");
     }
-    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);
-}
-
-else {
-    if( file_exists("cleo/FOV.ini")){
-        ini::open("cleo/FOV.ini");
-        if(($SCREEN->width / $SCREEN->height) < 1.9) ini::write("fov", "fov", 90);
-        else ini::write("fov", "fov", 60);
-    }
-
-    if( file_exists("moddedsaa/") && file_exists("programs/loadsc/loadsc169hd_ms.txd")){
-            copy( "programs/loadsc/loadsc169hd_ms.txd", "moddedsaa/LOADSCS.txd");
-    }
-
-    if( file_exists("scripts/moddedsaa/") && file_exists("programs/loadsc/loadsc169hd_ms.txd")){
-            copy( "programs/loadsc/loadsc169hd_ms.txd", "scripts/moddedsaa/LOADSCS.txd");
-    }
-
-    if(file_exists("programs/loadsc/loadsc169hd.txd")) {
-        copy( "programs/loadsc/loadsc169hd.txd", "models/txd/LOADSCS.txd");
-    }
-    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);
-}";}s:4:"lscr";N;s:11:"tabcontrol2";a:1:{s:8:"onchange";s:182:"
+    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);";}s:4:"lscr";N;s:11:"tabcontrol2";a:1:{s:8:"onchange";s:182:"
 /*elseif( $self->tabIndex == 2){
 	c("scP")->toFront();
 	}*/
@@ -342,8 +317,9 @@ foreach( findFiles( "$progDir", "asi", false, false) as $as ){
 
 c("listBox2")->items->selected = $lBs;
 $lBs = null;
-unset( $lBs );";}s:7:"button1";a:1:{s:7:"onclick";s:30:"c("fmProgsEdit")->showModal();";}s:6:"label3";a:1:{s:7:"onclick";s:149:"c("fmPHPScrs->listBox1")->text = findFiles( "programs/php", "php", false, false);
+unset( $lBs );";}s:7:"button1";a:1:{s:7:"onclick";s:30:"c("fmProgsEdit")->showModal();";}s:6:"label3";a:1:{s:7:"onclick";s:184:"c("fmPHPScrs->listBox1")->text = findFiles( "programs/php", "php", false, false);
 c("fmPHPScrs->synEdit1")->text = "";
+c("fmPHPScrs->edit1")->text = "";
 c("fmPHPScrs")->showModal();";}s:6:"label2";N;s:6:"image3";N;s:13:"version_label";N;s:9:"checkbox3";a:1:{s:7:"onclick";s:99:"ini::open("programs/launcher.ini");
 ini::write("MAIN", "do_not_load_php", intval($self->checked));";}s:9:"checkbox2";a:1:{s:7:"onclick";s:378:"ini::open("programs/launcher.ini");
 ini::write( "MAIN", "hide_status_bar", intval($self->checked));
@@ -368,7 +344,25 @@ ini::write("MAIN", "do_not_write_gta_exe_on_register", intval($self->checked));"
     $as->repaint();
     $as->visible = $a;
     unset($a);
-}";}}s:8:"fmeditor";a:5:{s:8:"--fmedit";a:3:{s:8:"oncreate";s:717:"gui_propSet(c("synEdit1")->gutter, 'showlinenumbers', 1);
+}";}s:7:"button2";a:1:{s:7:"onclick";s:805:"
+    if( file_exists("cleo/FOV.ini")){
+        ini::open("cleo/FOV.ini");
+        if(($SCREEN->width / $SCREEN->height) < 1.9) ini::write("fov", "fov", 90);
+        else ini::write("fov", "fov", 60);
+    }
+
+    if( file_exists("moddedsaa/") && file_exists("programs/loadsc/loadsc169hd_ms.txd")){
+            copy( "programs/loadsc/loadsc169hd_ms.txd", "moddedsaa/LOADSCS.txd");
+    }
+
+    if( file_exists("scripts/moddedsaa/") && file_exists("programs/loadsc/loadsc169hd_ms.txd")){
+            copy( "programs/loadsc/loadsc169hd_ms.txd", "scripts/moddedsaa/LOADSCS.txd");
+    }
+
+    if(file_exists("programs/loadsc/loadsc169hd.txd")) {
+        copy( "programs/loadsc/loadsc169hd.txd", "models/txd/LOADSCS.txd");
+    }
+    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);";}}s:8:"fmeditor";a:5:{s:8:"--fmedit";a:3:{s:8:"oncreate";s:717:"gui_propSet(c("synEdit1")->gutter, 'showlinenumbers', 1);
 if( file_exists("programs/edit.ini")){
     ini::open( "programs/edit.ini");
     ini::read( "SynEdit", "font_name", $a[0]);

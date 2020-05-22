@@ -51,7 +51,6 @@ Manage scripts";
                 c("fmMain->panel1")->toFront();
                 c("combobox1")->itemIndex = 0;
                 c("lscr")->caption = "Aspect ratio:";
-                c("applyB4")->caption = "Set aspect ratio";
                 c("spb")->caption = "Delete";
                 c("rfs")->caption = "Refresh";
                 c("spButton1")->caption = "Refresh";
@@ -73,6 +72,7 @@ Manage scripts";
                 $lang_1 = "eng";
 
                 if( $sc ) c("label3")->caption = $message[9] . " " . $sc . " PHP " . $message[10];
+                else c("label3")->caption = "Manage PHP Scripts...";
 
                 lau::setStatus($GLOBALS["lau_info"][0] . " GB Free");
 
@@ -106,7 +106,6 @@ Manage scripts";
                 c("fmMain->panel1")->toFront();
                 c("combobox1")->itemIndex = 1;
                 c("lscr")->caption = "Пропорции:";
-                c("applyB4")->caption = "Выставить пропорции";
                 c("spb")->caption = "Удалить";
                 c("rfs")->caption = "Обновить";
                 c("spButton1")->caption = "Обновить";
@@ -129,6 +128,7 @@ Manage scripts";
                 $lang_1 = "rus";
 
                 if( $sc ) c("label3")->caption = $message[9] . " " . $sc . " PHP " . $message[10];
+                else c("label3")->caption = "Управлять PHP скриптами...";
 
                 lau::setStatus($GLOBALS["lau_info"][0] . " ГБ Доступно");
 
@@ -163,7 +163,6 @@ Manage de scripts";
                 c("lscr")->caption = "Ratio d'aspect:";
                 c("rfs")->caption = "Recharger";
                 c("spButton1")->caption = "Recharger";
-                c("applyB4")->caption = "Definir ratio d'aspect";
                 c("fmProgsEdit->button1")->caption = "Change";
                 c("fmEditButton->button4")->caption = "Cancel";
                 c("fmEditButton->label1")->caption = "Icone:";
@@ -184,6 +183,7 @@ Manage de scripts";
                 //Other
 
                 if( $sc ) c("label3")->caption = $message[9] . " " . $sc . " PHP " . $message[10];
+                else c("label3")->caption = "G?rer les scripts PHP...";
 
                 lau::setStatus($GLOBALS["lau_info"][0] . " GB Gratuits");
 

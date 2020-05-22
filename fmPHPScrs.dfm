@@ -73,8 +73,6 @@ object fmEdit: TForm
     Gutter.Font.Style = []
     Gutter.ShowLineNumbers = True
     ReadOnly = True
-    ExplicitWidth = 328
-    ExplicitHeight = 264
   end
   object button1: TBitBtn
     Left = 128

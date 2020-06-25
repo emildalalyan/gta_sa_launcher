@@ -1,5 +1,5 @@
-a:5:{s:6:"fmmain";a:42:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5301:"define(VER, "1.9.1");
-define(BUILD, "03.2020");
+a:5:{s:6:"fmmain";a:42:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5304:"define(VER, "1.9.2");
+define(BUILD, "26.06.2020");
 define(LINK, "http://www.vk.com/emildalalyan");
 global $find, $lang_1, $message, $ex, $ex1, $writeOnRegister, $sc, $ex2, $na, $na1, $na2, $progDir, $APPLICATION;
 
@@ -224,14 +224,14 @@ else run( $ex1, false);";}s:3:"scp";N;s:8:"unoftext";N;s:8:"verlabel";N;s:6:"lab
 switch( $self->tabIndex ){
     case 0: c("panel1")->toFront(); break;
     case 1: c("panel2")->toFront(); break;
-}";}s:3:"edc";a:1:{s:7:"onclick";s:594:"global $message, $find;
+}";}s:3:"edc";a:1:{s:7:"onclick";s:593:"global $message, $find;
 if(!c("listBox1")->items->selected){
     msg( $message[2] );
 }
 else {
     if(file_exists(c("listBox1")->items->selected)) {
         c("fmEditor->synEdit1")->LoadFromFile( c("listBox1")->items->selected);
-        c("fmEditor->data")->value = c("listBox1")->items->selected;
+        c("fmEditor->data")->value = c("fmEditor->synEdit1")->text;
         c("fmEditor")->caption = c("listBox1")->items->selected;
         c("fmEditor")->x = ($SCREEN->width / 2) - (c("fmEditor")->w / 2);
         c("fmEditor")->y = ($SCREEN->height / 2) - (c("fmEditor")->h / 2);
@@ -249,14 +249,14 @@ foreach( findFiles( "$progDir/cleo", "ini", false, false) as $f) c("listBox1")->
 c("listBox1")->items->selected = $lBs;
 
 $lBs = null;
-unset( $lBs );";}s:8:"listbox1";a:2:{s:10:"ondblclick";s:514:"if(c("listBox1")->items->selected && file_exists(c("listBox1")->items->selected)){
+unset( $lBs );";}s:8:"listbox1";a:2:{s:10:"ondblclick";s:513:"if(c("listBox1")->items->selected && file_exists(c("listBox1")->items->selected)){
             c("fmEditor->synEdit1")->LoadFromFile( c("listBox1")->items->selected);
-            c("fmEditor->data")->value = c("listBox1")->items->selected;
+            c("fmEditor->data")->value = c("fmEditor->synEdit1")->text;
             c("fmEditor")->caption = c("listBox1")->items->selected;
             c("fmEditor")->x = ($SCREEN->width / 2) - (c("fmEditor")->w / 2);
             c("fmEditor")->y = ($SCREEN->height / 2) - (c("fmEditor")->h / 2);
             c("fmEditor")->showModal();
-}";s:7:"onkeyup";s:711:"if( $key == 13){
+}";s:7:"onkeyup";s:710:"if( $key == 13){
     global $message, $find;
     if(!c("listBox1")->items->selected){
         msg( $message[2] );
@@ -264,7 +264,7 @@ unset( $lBs );";}s:8:"listbox1";a:2:{s:10:"ondblclick";s:514:"if(c("listBox1")->
     else {
             if(file_exists(c("listBox1")->items->selected)) {
                 c("fmEditor->synEdit1")->LoadFromFile( c("listBox1")->items->selected);
-                c("fmEditor->data")->value = c("listBox1")->items->selected;
+                c("fmEditor->data")->value = c("fmEditor->synEdit1")->text;
                 c("fmEditor")->caption = c("listBox1")->items->selected;
                 c("fmEditor")->x = ($SCREEN->width / 2) - (c("fmEditor")->w / 2);
                 c("fmEditor")->y = ($SCREEN->height / 2) - (c("fmEditor")->h / 2);
@@ -382,14 +382,14 @@ if( file_exists("programs/edit.ini")){
         c("synEdit1")->font->size = $a[3];
     }
     unset( $a );
-}";s:7:"onkeyup";s:0:"";s:12:"onclosequery";s:508:"global $message;
+}";s:7:"onkeyup";s:0:"";s:12:"onclosequery";s:493:"global $message;
 ini::open( "programs/edit.ini");
 ini::write( "Window", "w", $self->w);
 ini::write( "Window", "h", $self->h);
 
 $canClose = true;
 
-if( file_get_contents( c("data")->value ) != c("synEdit1")->text ){
+if( strcmp(c("data")->value, c("synEdit1")->text) ){
     $mD = messageDlg($message[1], mtConfirmation, 3);
     if( $mD == 6 ){
         if(!file_p_contents( c("data")->value, c("synEdit1")->text)){

@@ -6,7 +6,7 @@ object fmEdit: TForm
     'AAAAAhQCEQVDTEFTUxEFVEZvcm0RBlBBUkFNUxQFEQhhdmlzaWJsZQURAXgGChEB' +
     'eQYKEQFoCAFIEQF3CAIo'
   BorderIcons = []
-  BorderStyle = bsSizeToolWin
+  BorderStyle = bsSizeable
   Caption = 'View PHP Scripts...'
   ClientHeight = 320
   ClientWidth = 512
@@ -191,7 +191,7 @@ object fmEdit: TForm
   object edit1: TEdit
     Left = 8
     Top = 289
-    Width = 88
+    Width = 96
     Height = 22
     HelpType = htKeyword
     HelpKeyword = 

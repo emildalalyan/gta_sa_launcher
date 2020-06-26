@@ -1,4 +1,4 @@
-a:5:{s:6:"fmmain";a:42:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5304:"define(VER, "1.9.2");
+a:5:{s:6:"fmmain";a:42:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5304:"define(VER, "1.9.3");
 define(BUILD, "26.06.2020");
 define(LINK, "http://www.vk.com/emildalalyan");
 global $find, $lang_1, $message, $ex, $ex1, $writeOnRegister, $sc, $ex2, $na, $na1, $na2, $progDir, $APPLICATION;
@@ -362,7 +362,7 @@ ini::write("MAIN", "do_not_write_gta_exe_on_register", intval($self->checked));"
     if(file_exists("programs/loadsc/loadsc169hd.txd")) {
         copy( "programs/loadsc/loadsc169hd.txd", "models/txd/LOADSCS.txd");
     }
-    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);";}}s:8:"fmeditor";a:5:{s:8:"--fmedit";a:3:{s:8:"oncreate";s:717:"gui_propSet(c("synEdit1")->gutter, 'showlinenumbers', 1);
+    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);";}}s:8:"fmeditor";a:5:{s:8:"--fmedit";a:2:{s:8:"oncreate";s:717:"gui_propSet(c("synEdit1")->gutter, 'showlinenumbers', 1);
 if( file_exists("programs/edit.ini")){
     ini::open( "programs/edit.ini");
     ini::read( "SynEdit", "font_name", $a[0]);
@@ -371,7 +371,7 @@ if( file_exists("programs/edit.ini")){
     ini::read( "SynEdit", "font_size", $a[3]);
     ini::read( "Window", "w", $w[0]);
     ini::read( "Window", "h", $w[1]);
-    if( $w[0] || $w[1] ){
+    if( $w[0] && $w[1] ){
         $self->w = $w[0];
         $self->h = $w[1];
     }
@@ -382,7 +382,7 @@ if( file_exists("programs/edit.ini")){
         c("synEdit1")->font->size = $a[3];
     }
     unset( $a );
-}";s:7:"onkeyup";s:0:"";s:12:"onclosequery";s:493:"global $message;
+}";s:12:"onclosequery";s:548:"global $message;
 ini::open( "programs/edit.ini");
 ini::write( "Window", "w", $self->w);
 ini::write( "Window", "h", $self->h);
@@ -392,17 +392,20 @@ $canClose = true;
 if( strcmp(c("data")->value, c("synEdit1")->text) ){
     $mD = messageDlg($message[1], mtConfirmation, 3);
     if( $mD == 6 ){
-        if(!file_p_contents( c("data")->value, c("synEdit1")->text)){
+        if(!file_p_contents( c("fmEditor")->caption, c("synEdit1")->text)){
             messageDlg($message[3], mtInformation, MB_OK);
         }
+        c("data")->value = c("synEdit1")->text;
     }
     elseif( $mD == 2 ){
         $canClose = false;
     }
-}";}s:4:"data";N;s:9:"spbutton1";a:1:{s:7:"onclick";s:108:"if(file_p_contents( c("data")->value, c("synEdit1")->text)){
+}";}s:4:"data";N;s:9:"spbutton1";a:1:{s:7:"onclick";s:159:"if(file_p_contents( c("fmEditor")->caption, c("synEdit1")->text)){
+    c("data")->value = c("synEdit1")->text;
     messageDlg("OK", mtInformation, MB_OK);
-}";}s:8:"synedit1";a:1:{s:7:"onkeyup";s:166:"if( $key == 83 && $shift[0] == "ssCtrl"){
-    if(file_p_contents( c("data")->value, c("synEdit1")->text)){
+}";}s:8:"synedit1";a:1:{s:7:"onkeyup";s:221:"if( $key == 83 && $shift[0] == "ssCtrl"){
+    if(file_p_contents( c("fmEditor")->caption, c("synEdit1")->text)){
+        c("data")->value = c("synEdit1")->text;
         messageDlg("OK", mtInformation, MB_OK);
     }
 }";}s:9:"spbutton2";a:1:{s:7:"onclick";s:464:"$a = new TFontDialog;
@@ -450,11 +453,35 @@ if( $a->execute() && $a->fileName && file_exists( $a->fileName ) ){
     c("edit1")->text = $a->fileName;
 }
 
-unset( $a );";}s:7:"button4";a:1:{s:7:"onclick";s:27:"c("fmEditButton")->close();";}s:7:"button2";a:1:{s:7:"onclick";s:376:"global $ex, $ex1, $ex2, $message, $na, $na1, $na2;
+unset( $a );";}s:7:"button4";a:1:{s:7:"onclick";s:27:"c("fmEditButton")->close();";}s:7:"button2";a:1:{s:7:"onclick";s:1552:"global $ex, $ex1, $ex2, $message, $na, $na1, $na2;
 ini::open( "programs/buttons.ini");
-ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", c("edit1")->text);
-ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", c("edit2")->text);
-ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", c("edit3")->text);
+
+if( strcmp("",c("edit1")->text)){
+    if(strpos(c("edit1")->text, "(") === false && strpos(c("edit1")->text, ")") === false) ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", c("edit1")->text);
+    else {
+        ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", "");
+        messageBox( $message[3], "GTA SA: Launcher", MB_OK | MB_ICONERROR);
+    }
+}
+else ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", "");
+
+if( strcmp("",c("edit2")->text)){
+    if(strpos(c("edit2")->text, "(") === false && strpos(c("edit2")->text, ")") === false) ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", c("edit2")->text);
+    else {
+        ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", "");
+        messageBox( $message[3], "GTA SA: Launcher", MB_OK | MB_ICONERROR);
+    }
+}
+else ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", "");
+
+if( strcmp("",c("edit3")->text)){
+    if(strpos(c("edit3")->text, "(") === false && strpos(c("edit3")->text, ")") === false) ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", c("edit3")->text);
+    else {
+        ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", "");
+        messageBox( $message[3], "GTA SA: Launcher", MB_OK | MB_ICONERROR);
+    }
+}
+else ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", "");
 
 lau::Restart();";}s:7:"button5";a:1:{s:7:"onclick";s:36:"c("fmEditButton->edit2")->text = "";";}s:7:"button6";a:1:{s:7:"onclick";s:36:"c("fmEditButton->edit1")->text = "";";}}s:9:"fmphpscrs";a:5:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:62:"gui_propSet( c("synEdit1")->gutter, "showlineneumbers", true);";}s:7:"button2";a:1:{s:7:"onclick";s:265:"$a = new TOpenDialog;
 $a->filter = "PHP Files (*.php)|*.php";

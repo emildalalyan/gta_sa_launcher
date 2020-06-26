@@ -23,6 +23,36 @@ object fmEdit: TForm
   Visible = False
   PixelsPerInch = 96
   TextHeight = 13
+  object synEdit1: TSynEdit
+    Left = 0
+    Top = 30
+    Width = 560
+    Height = 290
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEIVFN5bkVkaXQRBlBBUkFNUxQHEQhhdmlzaWJsZQURCGFl' +
+      'bmFibGVkBREBdwxAYgAAAAAAABEBaAxAWwAAAAAAABEGcGFyZW50FwVURm9ybRQG' +
+      'EQpjbGFzc19uYW1lDggRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50' +
+      'cxQDDgkOCxEEc2VsZgoHRtz4EQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2Zv' +
+      'bnQADgwKAlk9UA4NFAIOAwURCnBvc2l0aW9uZXgRCnBvRGVzaWduZWQRBHRleHQN' +
+      'EQlhbGlnbm1lbnQGAg=='
+    Align = alClient
+    Ctl3D = False
+    ParentCtl3D = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Courier New'
+    Font.Style = []
+    TabOrder = 1
+    Gutter.Font.Charset = DEFAULT_CHARSET
+    Gutter.Font.Color = clWindowText
+    Gutter.Font.Height = -11
+    Gutter.Font.Name = 'Courier New'
+    Gutter.Font.Style = []
+    Gutter.ShowLineNumbers = True
+    WantTabs = True
+  end
   object panel1: TPanel
     Left = 0
     Top = 0
@@ -137,36 +167,6 @@ object fmEdit: TForm
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
     end
-  end
-  object synEdit1: TSynEdit
-    Left = 0
-    Top = 30
-    Width = 560
-    Height = 290
-    HelpType = htKeyword
-    HelpKeyword = 
-      'AAAAAhQCEQVDTEFTUxEIVFN5bkVkaXQRBlBBUkFNUxQHEQhhdmlzaWJsZQURCGFl' +
-      'bmFibGVkBREBdwxAYgAAAAAAABEBaAxAWwAAAAAAABEGcGFyZW50FwVURm9ybRQG' +
-      'EQpjbGFzc19uYW1lDggRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50' +
-      'cxQDDgkOCxEEc2VsZgoHRtz4EQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2Zv' +
-      'bnQADgwKAlk9UA4NFAIOAwURCnBvc2l0aW9uZXgRCnBvRGVzaWduZWQRBHRleHQN' +
-      'EQlhbGlnbm1lbnQGAg=='
-    Align = alClient
-    Ctl3D = False
-    ParentCtl3D = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Courier New'
-    Font.Style = []
-    TabOrder = 1
-    Gutter.Font.Charset = DEFAULT_CHARSET
-    Gutter.Font.Color = clWindowText
-    Gutter.Font.Height = -11
-    Gutter.Font.Name = 'Courier New'
-    Gutter.Font.Style = []
-    Gutter.ShowLineNumbers = True
-    WantTabs = True
   end
   object data: __TNoVisual
     Left = 360

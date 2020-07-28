@@ -1,5 +1,5 @@
-a:5:{s:6:"fmmain";a:42:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5304:"define(VER, "1.9.3");
-define(BUILD, "26.06.2020");
+a:5:{s:6:"fmmain";a:43:{s:8:"--fmedit";a:1:{s:8:"oncreate";s:5763:"define(VER, "2.0");
+define(BUILD, "07.2020");
 define(LINK, "http://www.vk.com/emildalalyan");
 global $find, $lang_1, $message, $ex, $ex1, $writeOnRegister, $sc, $ex2, $na, $na1, $na2, $progDir, $APPLICATION;
 
@@ -8,6 +8,9 @@ c("gameP")->toFront();
 
 c("fmMain->version_label")->caption = "GTA SA: Launcher v" . VER;
 
+if( !is_writable($progDir)) $nw = true;
+else {
+$nw = false;
 if( file_exists("programs/php/include")){
     $fi = findFiles("programs/php/include", "php", false, true);
     foreach( $fi as $as ){
@@ -51,6 +54,9 @@ c("fmMain->checkbox3")->checked = intval($var);
 ini::read("MAIN", "do_not_write_gta_exe_on_register", $var);
 $writeOnRegister = ! intval($var);
 c("fmMain->checkbox5")->checked = intval($var);
+
+ini::read("MAIN", "gta_sa_insteadof_w10", $iw10);
+c("fmMain->checkbox6")->checked = intval($iw10);
 
 ini::read("MAIN", "hide_status_bar", $var );
 c("fmMain->checkbox2")->checked = boolval($var);
@@ -117,6 +123,15 @@ if( file_exists("programs/buttons.ini")){
     ini::read("button2","icon",$ic2);
     ini::read("button2","exec",$ex2);
     ini::read("button2","name",$na2);
+    $ic = chrStringOrd($ic, "s");
+    $ex = chrStringOrd($ex, "s");
+    $na = chrStringOrd($na, "s");
+    $ic1 = chrStringOrd($ic1, "s");
+    $ex1 = chrStringOrd($ex1, "s");
+    $na1 = chrStringOrd($na1, "s");
+    $ic2 = chrStringOrd($ic2, "s");
+    $ex2 = chrStringOrd($ex2, "s");
+    $na2 = chrStringOrd($na2, "s");
     
     if( !$ex ) c("satp")->enabled = file_exists("programs/satp/sat.exe");
     else c("satp")->enabled = file_exists($ex);
@@ -144,14 +159,17 @@ else {
 
 $com = new COM("winmgmts://localhost/root/CIMV2");
 foreach( $com->ExecQuery("SELECT FreeSpace FROM Win32_LogicalDisk WHERE Caption = " . '"' . substr( $progDir, 0, 2) . '"') as $as ){
-    lau::setStatus(round($as->FreeSpace / 1024 / 1024 / 1024, 1) . " GB Free");
     $GLOBALS["lau_info"][0] = round($as->FreeSpace / 1024 / 1024 / 1024, 1);
     break;
 }
 
+}
+
 lau::setLang(intval($lang));
 
-unset($lang);";}s:6:"otherp";N;s:5:"gamep";N;s:11:"tabcontrol1";a:1:{s:8:"onchange";s:225:"switch( $self->tabIndex ){
+if($nw) error_message( $message[13] );
+
+unset($lang, $nw);";}s:6:"otherp";N;s:5:"gamep";N;s:11:"tabcontrol1";a:1:{s:8:"onchange";s:225:"switch( $self->tabIndex ){
     case 0: c("gameP")->toFront(); return true;
     case 1: c("otherP")->toFront(); return true;
     case 2: c("scP")->toFront(); return true;
@@ -161,19 +179,22 @@ ini::write( "GlobalSets", "LoadPlugins", c("checkbox1")->checked);
 ini::open("scripts/global.ini");
 ini::write( "GlobalSets", "LoadPlugins", c("checkbox1")->checked);
 
-$self->enabled = false;";}s:6:"gta_sa";a:2:{s:7:"onclick";s:269:"global $message;
+$self->enabled = false;";}s:6:"gta_sa";a:2:{s:7:"onclick";s:375:"global $message;
 if( !file_exists("gta_sa_w10.exe")){
     if( file_exists("gta_sa.exe")) run("gta_sa.exe");
     elseif( !file_exists("gta_sa.exe") ) messageBox( $message[0], "GTA SA: Launcher", MB_OK | MB_ICONERROR );
 }
-else run("gta_sa_w10.exe");
+else {
+    if(!c("fmMain->checkbox6")->checked or !file_exists("gta_sa.exe")) run("gta_sa_w10.exe");
+    else run("gta_sa.exe");
+}
 
 app::close();";s:11:"onmousedown";s:184:"if( $button == 1 ){
     exec('taskkill -im "gta_sa_w10.exe"');
     exec('taskkill -im "gta_sa.exe"');
     
     messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION );
-}";}s:4:"samp";a:1:{s:7:"onclick";s:624:"global $message, $writeOnRegister, $ex2;
+}";}s:4:"samp";a:1:{s:7:"onclick";s:945:"global $message, $writeOnRegister, $ex2;
 if( isset( $ex2 ) && file_exists( $ex2)){
     run( $ex2 );
 }
@@ -181,7 +202,11 @@ else {
 if( file_exists("samp.exe")){
     if( $writeOnRegister){
         if( file_exists("gta_sa_w10.exe")){
-            writeRegKey( "HKEY_CURRENT_USER", "Software\SAMP\gta_sa_exe", $progDir . "gta_sa_w10.exe");
+            if(!c("fmMain->checkbox6")->checked) writeRegKey( "HKEY_CURRENT_USER", "Software\SAMP\gta_sa_exe", $progDir . "gta_sa_w10.exe");
+            else {
+                if(file_exists("gta_sa.exe")) writeRegKey( "HKEY_CURRENT_USER", "Software\SAMP\gta_sa_exe", $progDir . "gta_sa.exe");
+                else writeRegKey( "HKEY_CURRENT_USER", "Software\SAMP\gta_sa_exe", $progDir . "gta_sa_w10.exe");
+            }
         }
         else if( file_exists("gta_sa.exe")){
             writeRegKey( "HKEY_CURRENT_USER", "Software\SAMP\gta_sa_exe", $progDir . "gta_sa.exe");
@@ -362,7 +387,8 @@ ini::write("MAIN", "do_not_write_gta_exe_on_register", intval($self->checked));"
     if(file_exists("programs/loadsc/loadsc169hd.txd")) {
         copy( "programs/loadsc/loadsc169hd.txd", "models/txd/LOADSCS.txd");
     }
-    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);";}}s:8:"fmeditor";a:5:{s:8:"--fmedit";a:2:{s:8:"oncreate";s:717:"gui_propSet(c("synEdit1")->gutter, 'showlinenumbers', 1);
+    messageBox("OK", "GTA SA: Launcher", MB_OK | MB_ICONINFORMATION);";}s:9:"checkbox6";a:1:{s:7:"onclick";s:104:"ini::open("programs/launcher.ini");
+ini::write("MAIN", "gta_sa_insteadof_w10", intval($self->checked));";}}s:8:"fmeditor";a:6:{s:8:"--fmedit";a:2:{s:8:"oncreate";s:717:"gui_propSet(c("synEdit1")->gutter, 'showlinenumbers', 1);
 if( file_exists("programs/edit.ini")){
     ini::open( "programs/edit.ini");
     ini::read( "SynEdit", "font_name", $a[0]);
@@ -382,44 +408,9 @@ if( file_exists("programs/edit.ini")){
         c("synEdit1")->font->size = $a[3];
     }
     unset( $a );
-}";s:12:"onclosequery";s:548:"global $message;
-ini::open( "programs/edit.ini");
-ini::write( "Window", "w", $self->w);
-ini::write( "Window", "h", $self->h);
-
-$canClose = true;
-
-if( strcmp(c("data")->value, c("synEdit1")->text) ){
-    $mD = messageDlg($message[1], mtConfirmation, 3);
-    if( $mD == 6 ){
-        if(!file_p_contents( c("fmEditor")->caption, c("synEdit1")->text)){
-            messageDlg($message[3], mtInformation, MB_OK);
-        }
-        c("data")->value = c("synEdit1")->text;
-    }
-    elseif( $mD == 2 ){
-        $canClose = false;
-    }
-}";}s:4:"data";N;s:9:"spbutton1";a:1:{s:7:"onclick";s:159:"if(file_p_contents( c("fmEditor")->caption, c("synEdit1")->text)){
-    c("data")->value = c("synEdit1")->text;
-    messageDlg("OK", mtInformation, MB_OK);
-}";}s:8:"synedit1";a:1:{s:7:"onkeyup";s:221:"if( $key == 83 && $shift[0] == "ssCtrl"){
-    if(file_p_contents( c("fmEditor")->caption, c("synEdit1")->text)){
-        c("data")->value = c("synEdit1")->text;
-        messageDlg("OK", mtInformation, MB_OK);
-    }
-}";}s:9:"spbutton2";a:1:{s:7:"onclick";s:464:"$a = new TFontDialog;
-$a->font->assign( c("synEdit1")->font );
-if( $a->execute() ){
-    ini::open( "programs/edit.ini");
-    ini::write( "SynEdit", "font_name", $a->font->name);
-    ini::write( "SynEdit", "font_style", $a->font->style[0]);
-    ini::write( "SynEdit", "font_color", $a->font->color);
-    ini::write( "SynEdit", "font_size", $a->font->size);
-    c("synEdit1")->font->assign( $a->font );
-    c("synEdit1")->font->assign = $a->font->assign;
-}";}}s:11:"fmprogsedit";a:2:{s:8:"--fmedit";a:1:{s:6:"onshow";s:230:"global $message;
-c("fmProgsEdit->listBox1")->text = c("fmMain->satp")->caption . " - " . $message[6] .  " 0\n" . c("fmMain->txd")->caption . " - " . $message[6] .  " 1\n" . c("fmMain->samp")->caption . " - " . $message[6] . " 2";";}s:7:"button1";a:1:{s:7:"onclick";s:823:"global $message;
+}";s:12:"onclosequery";s:29:"fmEditor_up::quit($canClose);";}s:4:"data";N;s:9:"spbutton1";a:1:{s:7:"onclick";s:19:"fmEditor_up::sav();";}s:8:"synedit1";a:1:{s:11:"onmousedown";s:74:"if($button == 1) c("popupMenu")->popup( cursor_pos_x(), cursor_pos_y());
+";}s:9:"spbutton2";a:1:{s:7:"onclick";s:20:"fmEditor_up::font();";}s:9:"popupmenu";N;}s:11:"fmprogsedit";a:2:{s:8:"--fmedit";a:1:{s:6:"onshow";s:230:"global $message;
+c("fmProgsEdit->listBox1")->text = c("fmMain->satp")->caption . " - " . $message[6] .  " 0\n" . c("fmMain->txd")->caption . " - " . $message[6] .  " 1\n" . c("fmMain->samp")->caption . " - " . $message[6] . " 2";";}s:7:"button1";a:1:{s:7:"onclick";s:940:"global $message;
 if( c("listBox1")->items->selected ){
     c("fmEditButton->edit1")->text = "";
     c("fmEditButton->edit2")->text = "";
@@ -429,6 +420,9 @@ if( c("listBox1")->items->selected ){
         ini::read( "button" . c("listBox1")->itemIndex, "icon", $ic);
         ini::read( "button" . c("listBox1")->itemIndex, "exec", $ex);
         ini::read( "button" . c("listBox1")->itemIndex, "name", $na);
+        $ic = chrStringOrd($ic, "s");
+        $ex = chrStringOrd($ex, "s");
+        $na = chrStringOrd($na, "s");
         c("fmEditButton->edit1")->text = $ic;
         c("fmEditButton->edit2")->text = $ex;
         c("fmEditButton->edit3")->text = $na;
@@ -453,33 +447,21 @@ if( $a->execute() && $a->fileName && file_exists( $a->fileName ) ){
     c("edit1")->text = $a->fileName;
 }
 
-unset( $a );";}s:7:"button4";a:1:{s:7:"onclick";s:27:"c("fmEditButton")->close();";}s:7:"button2";a:1:{s:7:"onclick";s:1552:"global $ex, $ex1, $ex2, $message, $na, $na1, $na2;
+unset( $a );";}s:7:"button4";a:1:{s:7:"onclick";s:27:"c("fmEditButton")->close();";}s:7:"button2";a:1:{s:7:"onclick";s:800:"global $ex, $ex1, $ex2, $message, $na, $na1, $na2;
 ini::open( "programs/buttons.ini");
 
-if( strcmp("",c("edit1")->text)){
-    if(strpos(c("edit1")->text, "(") === false && strpos(c("edit1")->text, ")") === false) ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", c("edit1")->text);
-    else {
-        ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", "");
-        messageBox( $message[3], "GTA SA: Launcher", MB_OK | MB_ICONERROR);
-    }
+if( strcmp("",c("edit1")->text)){;
+    ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", stringOrd(c("edit1")->text, "s"));
 }
 else ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "icon", "");
 
 if( strcmp("",c("edit2")->text)){
-    if(strpos(c("edit2")->text, "(") === false && strpos(c("edit2")->text, ")") === false) ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", c("edit2")->text);
-    else {
-        ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", "");
-        messageBox( $message[3], "GTA SA: Launcher", MB_OK | MB_ICONERROR);
-    }
+    ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", stringOrd(c("edit2")->text, "s"));
 }
 else ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "exec", "");
 
 if( strcmp("",c("edit3")->text)){
-    if(strpos(c("edit3")->text, "(") === false && strpos(c("edit3")->text, ")") === false) ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", c("edit3")->text);
-    else {
-        ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", "");
-        messageBox( $message[3], "GTA SA: Launcher", MB_OK | MB_ICONERROR);
-    }
+    ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", stringOrd(c("edit3")->text, "s"));
 }
 else ini::write( "button" . c("fmProgsEdit->listBox1")->itemIndex, "name", "");
 

@@ -2541,6 +2541,27 @@ object fmEdit: TForm
           ParentFont = False
           TabOrder = 4
         end
+        object checkbox6: TCheckBox
+          Left = 16
+          Top = 128
+          Width = 336
+          Height = 24
+          HelpType = htKeyword
+          HelpKeyword = 
+            'AAAAAhQCEQVDTEFTUxEJVENoZWNrQm94EQZQQVJBTVMUCBEIYXZpc2libGUFEQhh' +
+            'ZW5hYmxlZAURAXcMQGIAAAAAAAARAWgMQDgAAAAAAAARBnBhcmVudBcJVEdyb3Vw' +
+            'Qm94FAQRCmNsYXNzX25hbWUOCBEIACoAX2ZvbnQAEQRzZWxmCgZtn5ARCAAqAHBy' +
+            'b3BzFAARBHRleHQRNlJ1biBhbmQgd3JpdGUgImd0YV9zYS5leGUiIGluc3RlYWQg' +
+            'b2YgImd0YV9zYV93MTAuZXhlIhEBeAYYEQF5Bj4='
+          Caption = 'Run and write "gta_sa.exe" instead of "gta_sa_w10.exe"'
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 5
+        end
       end
     end
     object button2: TBitBtn

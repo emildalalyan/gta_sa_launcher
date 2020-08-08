@@ -7,7 +7,7 @@ Launcher for Grand Theft Auto: San Andreas.
 
 + INI files editing
 
-Лоунчер для легендарной Grand Theft Auto: San Andreas.
+Лоунчер для Grand Theft Auto: San Andreas.
 
 + Вкл\Выкл CLEO/ASI Loader'a
 

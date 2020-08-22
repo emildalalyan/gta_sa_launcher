@@ -1,26 +1,26 @@
 # Grand Theft Auto San Andreas Launcher
-Launcher for Grand Theft Auto: San Andreas.
++ Launcher for Grand Theft Auto: San Andreas.
 
-+ On/Off CLEO/ASI Loader
+  + On/Off CLEO/ASI Loader
 
-+ Auto-write your GTASA folder in SAMP
+  + Auto-write your GTASA folder in SAMP
 
-+ INI files editing
+  + INI files editing
 
-Лоунчер для Grand Theft Auto: San Andreas.
++ Лоунчер для Grand Theft Auto: San Andreas.
 
-+ Вкл\Выкл CLEO/ASI Loader'a
+  + Вкл\Выкл CLEO/ASI Loader'a
 
-+ Автоматическая запись вашей папки GTASA в SAMP
+  + Автоматическая запись вашей папки GTASA в SAMP
 
-+ Редактирование INI файлов
+  + Редактирование INI файлов
 
 ## Requirements
-Windows XP RTM
+  + Windows XP RTM
 
-~7 MB Disk Space
+  + ~7 MB Disk Space
 
-MS VC++ 2008 Redistibutable
+  + MS VC++ 2008 Redistibutable
 
 ## Screenshots
 ![IMAGE](https://github.com/emil0911/gta_sa_launcher/blob/master/screen.png?raw=true)

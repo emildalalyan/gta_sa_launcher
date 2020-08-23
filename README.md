@@ -6,6 +6,8 @@
   + Auto-write your GTASA folder in SAMP
 
   + INI files editing
+  
+  + Ability to kill GTA process. (*RMB* on **Start GTA:SA** button)
 
 + Лоунчер для Grand Theft Auto: San Andreas.
 
@@ -14,6 +16,8 @@
   + Автоматическая запись вашей папки GTASA в SAMP
 
   + Редактирование INI файлов
+  
+  + Возможность убить процесс GTA. (*ПКМ* на кнопку **Запустить GTA:SA**)
 
 ## Requirements
   + Windows XP RTM

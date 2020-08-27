@@ -1,5 +1,5 @@
 # Grand Theft Auto San Andreas Launcher
-+ Launcher for Grand Theft Auto: San Andreas.
++ **Launcher for Grand Theft Auto: San Andreas.**
 
   + On/Off CLEO/ASI Loader
 
@@ -9,7 +9,7 @@
   
   + Ability to kill GTA process. (*RMB* on **Start GTA:SA** button)
 
-+ Лоунчер для Grand Theft Auto: San Andreas.
++ **Лоунчер для Grand Theft Auto: San Andreas.**
 
   + Вкл\Выкл CLEO/ASI Loader'a
 

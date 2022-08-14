@@ -9,7 +9,7 @@
   
   + Ability to kill GTA process. (*RMB* on **Start GTA:SA** button)
 
-+ **Лоунчер для Grand Theft Auto: San Andreas.**
++ **Лончер для Grand Theft Auto: San Andreas.**
 
   + Вкл\Выкл CLEO/ASI Loader'a
 
